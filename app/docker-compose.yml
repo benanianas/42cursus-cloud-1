@@ -1,0 +1,53 @@
+version: '3.6'
+services:
+  mysql:
+    build: ./mysql
+    env_file: mysql/.env
+    expose:
+      - 3306
+    volumes:
+      - db:/var/lib/mysql
+    restart: always
+    container_name: mysql
+  phpmyadmin:
+    depends_on:
+      - mysql
+    image: phpmyadmin/phpmyadmin
+    restart: always
+    ports:
+      - '8000:80'
+    environment:
+      PMA_HOST: mysql
+      MYSQL_PASSWORD: DD3cL5jMY
+      MYSQL_USER: birdperson
+  wordpress:
+    build: ./wordpress
+    env_file:
+    - mysql/.env
+    - wordpress/.env
+    expose:
+      - 5000
+    volumes:
+      - ws:/var/www
+    depends_on:
+      - mysql
+    restart: always
+    container_name: wordpress
+  php-myadmin:
+    build: ./php-myadmin
+    volumes:
+      - ws:/var/www
+    container-name: php-myadmin
+  nginx:
+    build: ./nginx
+    volumes:
+      - ws:/var/www
+    ports:
+      - 80:80
+      - 443:443
+    depends_on:
+      - wordpress
+    container_name: nginx
+volumes:
+  ws:
+  db:
