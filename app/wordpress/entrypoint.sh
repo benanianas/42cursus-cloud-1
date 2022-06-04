@@ -1,7 +1,5 @@
 #!/bin/bash
 
-sed -i 's/listen = \/run\/php\/php7.3-fpm.sock/listen = 5000/g' /etc/php/7.3/fpm/pool.d/www.conf
-
 if ! [ -d /var/www/wordpress ] ; then
 mkdir -p /var/www/wordpress
 wp core download --path=/var/www/wordpress --version=6.0 --allow-root --quiet

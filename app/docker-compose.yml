@@ -9,17 +9,6 @@ services:
       - db:/var/lib/mysql
     restart: always
     container_name: mysql
-  phpmyadmin:
-    depends_on:
-      - mysql
-    image: phpmyadmin/phpmyadmin
-    restart: always
-    ports:
-      - '8000:80'
-    environment:
-      PMA_HOST: mysql
-      MYSQL_PASSWORD: DD3cL5jMY
-      MYSQL_USER: birdperson
   wordpress:
     build: ./wordpress
     env_file:
@@ -33,11 +22,16 @@ services:
       - mysql
     restart: always
     container_name: wordpress
-  # php-myadmin:
-  #   build: ./php-myadmin
-  #   volumes:
-  #     - ws:/var/www
-  #   container-name: php-myadmin
+  phpmyadmin:
+    build: ./phpmyadmin
+    expose:
+      - 6000
+    volumes:
+      - ws:/var/www
+    depends_on:
+      - mysql
+    restart: always
+    container_name: phpmyadmin
   nginx:
     build: ./nginx
     volumes:
@@ -45,6 +39,7 @@ services:
     ports:
       - 80:80
       - 443:443
+      - 8080:8080
     depends_on:
       - wordpress
     container_name: nginx
