@@ -33,11 +33,11 @@ services:
       - mysql
     restart: always
     container_name: wordpress
-  php-myadmin:
-    build: ./php-myadmin
-    volumes:
-      - ws:/var/www
-    container-name: php-myadmin
+  # php-myadmin:
+  #   build: ./php-myadmin
+  #   volumes:
+  #     - ws:/var/www
+  #   container-name: php-myadmin
   nginx:
     build: ./nginx
     volumes:
