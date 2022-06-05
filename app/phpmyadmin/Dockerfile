@@ -13,6 +13,7 @@ RUN cp /var/www/phpmyadmin/config.sample.inc.php /var/www/phpmyadmin/config.inc.
 RUN sed -i 's/localhost/mysql/g' /var/www/phpmyadmin/config.inc.php
 RUN echo >> /var/www/phpmyadmin/config.inc.php
 RUN sed -i 's/listen = \/run\/php\/php7.3-fpm.sock/listen = 6000/g' /etc/php/7.3/fpm/pool.d/www.conf
+RUN echo "\$cfg['blowfish_secret'] = '$(openssl rand -base64 22)';" >> /var/www/phpmyadmin/config.inc.php
 RUN mkdir /run/php/
 
 CMD [ "php-fpm7.3", "--nodaemonize" ]
