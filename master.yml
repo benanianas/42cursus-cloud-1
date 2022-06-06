@@ -1,0 +1,8 @@
+- name: Deploy wordpress Website
+  hosts: webservers
+  roles:
+    - dependencies
+    - database
+    - wordpress
+    - phpmyadmin
+    - webserver
