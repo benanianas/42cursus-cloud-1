@@ -1,0 +1,22 @@
+- name: Build wordpress Image
+  docker_image:
+    name: wordpress
+    source: build
+    build:
+      path: /root/Dockerfiles/wordpress
+
+- name: Run Wordpress Container
+  docker_container:
+    name: wordpress
+    image: wordpress
+    restart: yes
+    exposed_ports:
+      - 5000
+    volumes:
+      - wp:/var/www/wordpress
+    env:
+      HOST: "{{inventory_hostname}}"
+    env_file: /root/Dockerfiles/wordpress/.env
+    networks:
+      - name: local_network
+        ipv4_address: "192.0.69.6"

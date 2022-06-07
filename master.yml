@@ -2,7 +2,8 @@
   hosts: webservers
   roles:
     - dependencies
-    # - database
-    # - wordpress
-    # - phpmyadmin
-    # - webserver
+    - prerequisites
+    - database
+    - webserver
+    - wordpress
+    - phpmyadmin

@@ -1,0 +1,21 @@
+- name: build mySql Image
+  docker_image:
+    name: mysql
+    source: build
+    build:
+      path: /root/Dockerfiles/mysql
+
+- name: Run mysql Container
+  docker_container:
+    name: mysql
+    image: mysql
+    restart: yes
+    exposed_ports:
+      - 3306
+    env_file: /root/Dockerfiles/mysql/.env
+    volumes:
+      - db:/var/lib/mysql
+    networks:
+      - name: local_network
+        ipv4_address: "192.0.69.4"
+

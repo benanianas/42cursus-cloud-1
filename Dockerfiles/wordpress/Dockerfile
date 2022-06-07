@@ -11,5 +11,5 @@ RUN mv /tmp/wp-cli.phar /usr/local/bin/wp
 COPY ["entrypoint.sh", "/"]
 RUN chmod +x /entrypoint.sh
 RUN mkdir /run/php/
-ENTRYPOINT [ "/entrypoint.sh" ]
+ENTRYPOINT [ "./entrypoint.sh" ]
 CMD [ "php-fpm7.3", "--nodaemonize" ]

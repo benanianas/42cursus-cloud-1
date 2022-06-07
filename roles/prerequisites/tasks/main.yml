@@ -1,0 +1,17 @@
+- name: Create a local network
+  docker_network:
+    name: local_network
+    ipam_config:
+      - subnet: '192.0.69.0/8'
+
+- name: Create a Persistent Volume for DataBase
+  docker_volume:
+    name: db
+
+- name: Create wordpress Volume
+  docker_volume:
+    name: wp
+
+- name: Create phpmyadmin Volume
+  docker_volume:
+    name: pma

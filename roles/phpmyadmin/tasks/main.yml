@@ -1,0 +1,20 @@
+- name: build phpMyAdmin Image
+  docker_image:
+    name: phpmyadmin
+    source: build
+    build:
+      path: /root/Dockerfiles/phpmyadmin
+
+- name: Run phpMyAdmin Container
+  docker_container:
+    name: phpmyadmin
+    image: phpmyadmin
+    restart: yes
+    exposed_ports:
+      - 6000
+    volumes:
+      - pma:/var/www/phpmyadmin
+    networks:
+      - name: local_network
+        ipv4_address: "192.0.69.7"
+    

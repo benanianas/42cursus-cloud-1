@@ -43,7 +43,7 @@
 - name: Copy Dockerfiles
   copy:
     src: ./Dockerfiles
-    dest: /root/Dockerfiles
+    dest: /root
     owner: root
     group: root
     mode: '0755'
