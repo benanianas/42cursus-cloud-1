@@ -16,6 +16,7 @@
       - wp:/var/www/wordpress
     env:
       HOST_IP: "{{host_ip}}"
+      HOST_DOMAIN: "{{host_domain}}"
     env_file: /root/Dockerfiles/wordpress/.env
     networks:
       - name: local_network
