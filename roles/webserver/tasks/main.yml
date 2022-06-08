@@ -5,7 +5,7 @@
     build:
       path: /root/Dockerfiles/nginx
       args:
-        HOST: "{{inventory_hostname}}"
+        HOST: "{{host_domain}}"
 
 - name: Run nginx Container
   docker_container:
